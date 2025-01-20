@@ -1,0 +1,160 @@
+/* General app styles */
+.app-container {
+  font-family: Arial, sans-serif;
+  display: flex;
+ 
+}
+
+
+/* Navbar container styles */
+.navbar {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2b2626;
+  padding-left: 100px;
+  
+  width: 100%; /* Ensure it spans the full width */
+  z-index: 20;
+}
+
+
+
+/* General Navbar Styling */
+
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-item {
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  margin-right: 20px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #fdfdfd;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link.active {
+  color: #007bff; /* Active link color */
+}
+
+/* Icon and Text Container */
+.icon-text-container {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 30px;
+}
+
+.appicon{
+  padding-left: 20px;
+  width: 100px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px 0;
+  width: 200px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-item:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  padding: 8px 10px;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Right Side - Profile & Notifications */
+.icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.icon-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-link img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar-left {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .navbar-right {
+    display: block;
+  }
+
+  .navbar-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .navbar-item:last-child {
+    margin-bottom: 0;
+  }
+}
