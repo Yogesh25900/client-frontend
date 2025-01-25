@@ -1,0 +1,31 @@
+/* SettingsPage.css */
+.settings-page {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .settings-options {
+    margin-top: 20px;
+  }
+  
+  .settings-options label {
+    display: block;
+    margin: 10px 0;
+  }
+  
+  .save-button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .save-button:hover {
+    background-color: #218838;
+  }
+  

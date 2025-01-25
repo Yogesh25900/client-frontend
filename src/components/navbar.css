@@ -1,160 +1,174 @@
-/* General app styles */
-.app-container {
-  font-family: Arial, sans-serif;
-  display: flex;
- 
-}
-
-
-/* Navbar container styles */
-.navbar {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #2b2626;
-  padding-left: 100px;
+/* Sidebar container */
+.sidebar {
+    width: 16rem; /* Equivalent to w-64 */
+    min-height: 100vh; /* Equivalent to min-h-screen */
+    background-color: #0f0b1d;
+    color: white;
+    padding: 1.5rem; /* Equivalent to p-6 */
+    display: flex;
+    flex-direction: column;
+  }
   
-  width: 100%; /* Ensure it spans the full width */
-  z-index: 20;
-}
-
-
-
-/* General Navbar Styling */
-
-
-.navbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px 20px;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  list-style: none;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.navbar-item {
-  padding-left: 20px;
-  padding-right: 20px;
-  position: relative;
-  margin-right: 20px;
-}
-
-.navbar-link {
-  text-decoration: none;
-  color: #fdfdfd;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-link.active {
-  color: #007bff; /* Active link color */
-}
-
-/* Icon and Text Container */
-.icon-text-container {
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  width: 30px;
-}
-
-.appicon{
-  padding-left: 20px;
-  width: 100px;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 10px 0;
-  width: 200px;
-  z-index: 1000;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.navbar-item:hover .dropdown-menu {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.dropdown-menu li {
-  padding: 8px 10px;
-}
-
-.dropdown-menu li a {
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-  display: block;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #f0f0f0;
-}
-
-/* Right Side - Profile & Notifications */
-.icon-container {
-  display: flex;
-  align-items: center;
-}
-
-.profile-link {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-}
-
-.icon-container img {
-  width: 20px;
-  height: 20px;
-}
-
-.profile-link img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .navbar-left {
-    display: block;
-    margin-bottom: 10px;
+  /* Logo section */
+  .sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem; /* Equivalent to mb-8 */
   }
-
-  .navbar-right {
-    display: block;
+  
+  .sidebar .logo .logo-icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
   }
-
-  .navbar-item {
-    margin-right: 0;
-    margin-bottom: 10px;
+  
+  .sidebar .logo .logo-text {
+    font-size: 1.25rem;
+    font-weight: 600; /* Equivalent to font-semibold */
   }
-
-  .navbar-item:last-child {
-    margin-bottom: 0;
+  
+  /* Main Navigation */
+  .sidebar nav {
+    flex-grow: 1;
   }
-}
+  
+  .sidebar nav .nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Equivalent to space-y-2 */
+  }
+  
+  /* Navigation Item */
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Equivalent to gap-3 */
+    padding: 0.75rem 1rem; /* Equivalent to px-4 py-3 */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* Equivalent to hover:bg-white/5 */
+  }
+  
+  .nav-item.active {
+    background-color: #2563eb; /* Equivalent to bg-blue-600 */
+  }
+  
+  .nav-item .icon {
+    font-size: 1.25rem;
+    color: #93c5fd; /* Equivalent to text-blue-400 */
+  }
+  
+  .nav-item.active .icon {
+    color: white;
+  }
+  
+  .nav-item span {
+    font-weight: 500; /* Equivalent to font-medium */
+  }
+  
+  .nav-item.active span {
+    color: white;
+  }
+  
+  /* Account Pages Section */
+  .sidebar .account-section {
+    margin-top: 2rem;
+  }
+  
+  .sidebar .account-section h3 {
+    font-size: 0.75rem;
+    color: #6b7280; /* Equivalent to text-gray-500 */
+    font-weight: 600;
+    margin-bottom: 1rem; /* Equivalent to mb-4 */
+  }
+  
+  .sidebar .account-section .nav-section {
+    margin-top: 1rem;
+  }
+  
+  .sidebar .account-section .nav-section .nav-item {
+    padding: 0.75rem 1rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  /* Help Section */
+  .sidebar .help-section {
+    margin-top: 2rem;
+    background: linear-gradient(to bottom right, #1e3a8a, #2563eb); /* Equivalent to bg-gradient-to-br */
+    border-radius: 1rem; /* Equivalent to rounded-xl */
+    padding: 1rem;
+  }
+  
+  .sidebar .help-section .help-icon {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem; /* Equivalent to mb-3 */
+  }
+  
+  .sidebar .help-section .help-icon .star-icon {
+    color: white;
+    font-size: 1.25rem;
+  }
+  
+  .sidebar .help-section h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem; /* Equivalent to mb-1 */
+  }
+  
+  .sidebar .help-section p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7); /* Equivalent to text-gray-300 */
+    margin-bottom: 0.75rem; /* Equivalent to mb-3 */
+  }
+  
+  .sidebar .help-section button {
+    width: 100%;
+    background-color: white;
+    color: #1d4ed8; /* Equivalent to text-blue-900 */
+    border-radius: 0.5rem; /* Equivalent to rounded-lg */
+    padding: 0.5rem;
+    font-weight: 500; /* Equivalent to font-medium */
+  }
+  
+
+  /* Prevent underline on all links */
+.nav-item {
+    text-decoration: none; /* Remove underline */
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: inherit; /* Ensure text color is inherited */
+  }
+  
+  .nav-item.active {
+    font-weight: bold; /* Optional: style for active item */
+    color: #007bff; /* Example color for active item */
+  }
+  
+  /* Specific styles for the NavLink component */
+  .nav-item .nav-link {
+    text-decoration: none; /* Prevent underline for the NavLink */
+  }
+  
+  .nav-item:hover {
+    background-color: #4b72bc; /* Optional: add hover effect */
+  }
+  
+  /* Remove default underline for active NavLink */
+  .nav-item .active {
+    text-decoration: none;
+  }
+  

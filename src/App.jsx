@@ -1,50 +1,29 @@
-// src/App.jsx
-import React, { useState } from 'react';  // Make sure you import useState
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Dashboard from './components/TestDashboard';
-import Home from './components/Home'; // Import the Home component
-import Chat from './components/Chat';
-import EditProfile from './components/EditProfile';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import HomePage from "./components/HomePage";
+import ProfilePage from "./components/ProfilePage";
+import SettingsPage from "./components/SettingsPage";
+import UserTables from "./components/UserTables";
 import './App.css'
-import TaskModal from './components/TaskModal'; // Import the TaskModal
-
-const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tasks, setTasks] = useState([]);
-
-  const openModal = () => {
-    setIsModalOpen(true);  // Open modal
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);  // Close modal
-  };
-
-  const addTask = (task) => {
-    setTasks([...tasks, task]);  // Add task to the task list
-  };
-
+function App() {
   return (
     <Router>
-       <div className="app">
-       <Navbar openModal={openModal} /> {/* Pass openModal function to Navbar */}
-        
-        <div className="maincontainer">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
-            <Route path="/edit-profile" element={<EditProfile />} />
-          </Routes>
-        </div>
-      </div>
-      <TaskModal 
-        isOpen={isModalOpen} 
-        closeModal={closeModal} 
-        addTask={addTask}
-      />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {/* Remove the `/dashboard` part */}
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="home" element={<HomePage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="user-tables" element={<UserTables />} /> {/* Add new route */}
+
+        </Route>
+        {/* Direct route for settings */}
+      </Routes>
     </Router>
   );
-};
+}
 
 export default App;

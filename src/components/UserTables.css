@@ -1,0 +1,241 @@
+/* General Styles */
+
+.user-tables {
+    min-height: 100vh;
+    background-color: #1b1b1b;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+  
+  .header {
+    border-bottom: 1px solid #333;
+    padding: 16px;
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+    color: #888;
+  }
+  
+  .separator {
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .search-container {
+    position: relative;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+  }
+  
+  .search-input {
+    background-color: #111c44;
+    border-radius: 12px;
+    padding: 8px 16px 8px 32px;
+    color: #ccc;
+    font-size: 14px;
+    border: none;
+    outline: none;
+  }
+  
+  .search-input::placeholder {
+    color: #888;
+  }
+  
+  .icon-button {
+    background-color: #111c44;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .main {
+    padding: 24px;
+  }
+  
+  .table-container {
+    background-color: #111c44;
+    border-radius: 12px;
+    padding: 24px;
+  }
+  
+  .table-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-header {
+    border-bottom: 1px solid #333;
+    text-align: left;
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .header-cell {
+    padding-bottom: 12px;
+    font-weight: 600;
+  }
+
+
+  .header-cell-actions {
+    padding-bottom: 12px;
+    font-weight: 600;
+    padding-left: 46px;  /* Add padding to shift the header content to the right */
+  }
+  
+  
+  .table-row {
+    border-bottom: 1px solid #333;
+  }
+  
+  .table-cell {
+    padding: 16px 0;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .user-name {
+    font-weight: 600;
+  }
+  
+  .user-email {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .user-function,
+  .user-role {
+    font-weight: 600;
+  }
+  
+  .status {
+    display: inline-flex;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+  
+  .online {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: rgb(142, 237, 142);
+  }
+  
+  .offline {
+    background-color: rgba(204, 191, 191, 0.2);
+    color: gray;
+  }
+  
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  
+  .pagination-button {
+    padding: 8px 16px; /* Use padding to provide space around the text */
+    font-size: 14px;
+    background-color: #333;
+    border-radius: 16px; /* Rounded corners but not fully circular */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+  
+  .pagination-button.active {
+    background-color: #4d90fe;
+  }
+  
+  .pagination-button:hover {
+    background-color: #555;
+  }
+  /* Style for the icon buttons */
+.icon-button {
+    background: none;
+    padding: 8px 12px;  /* Fixed padding to keep buttons rectangular */
+    cursor: pointer;
+    font-size: 14px;
+    color: #d1d5db; /* Gray text */
+    transition: color 0.3s ease, transform 0.3s ease;
+    margin-right: 8px; /* Space between icons */
+    border-radius: 8px; /* Optional: Rounded corners, if needed */
+  }
+  
+  /* Hover effects for the icon buttons */
+  .icon-button:hover {
+    color: white; /* Change text color to white on hover */
+     background-color: #4d90fe;
+; /* Add background color on hover */
+    transform: none; /* Don't scale the button on hover */
+  }
+  
+  /* Flex container to align the icons horizontally */
+  .table-cell-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Apply hover effect only on the icons */
+ /* Apply smooth scaling transition on the icons */
+.icon-button .lucide {
+    transition: transform 0.5s ease-in-out; /* Increased duration and changed easing function for smoother animation */
+  }
+  
+  /* Hover effect on icons (scale only the icon) */
+  .icon-button:hover .lucide {
+    transform: scale(1.2); /* Increase icon size on hover */
+  }
+  
