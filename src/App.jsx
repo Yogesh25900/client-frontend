@@ -14,7 +14,8 @@ function App() {
         <Route path="/" element={<Login />} />
         {/* Remove the `/dashboard` part */}
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="home" element={<HomePage />} />
+          <Route path="" element={<HomePage />} />
+
           <Route path="profile" element={<ProfilePage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="user-tables" element={<UserTables />} /> {/* Add new route */}

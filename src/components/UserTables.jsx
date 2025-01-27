@@ -1,33 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Search, Settings, Bell, Home } from "lucide-react";
-import './UserTables.css'
-import { Edit, Trash } from "lucide-react"; // Importing icons from lucide-react
-
-const users = [
-  {
-    id: 1,
-    name: "Esthera Jackson",
-    email: "esthera@simmmple.com",
-
-    status: "online",
-    employed: "23/04/18",
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    id: 2,
-    name: "Alexa Liras",
-    email: "alexa@simmmple.com",
-  
-    status: "offline",
-    employed: "11/01/19",
-    avatar:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  // ... more users
-];
+import './UserTables.css';
+import { Edit, Trash } from "lucide-react";
+import { fetchAllUsers } from '../services/AuthService';
 
 function UserTables() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [usersPerPage] = useState(5);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // For modal visibility
+  const [currentUser, setCurrentUser] = useState(null); // Store current user data for editing
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    const fetchUsersData = async () => {
+      try {
+        const data = await fetchAllUsers(token, currentPage, usersPerPage);
+        if (data && data.users) {
+          setUsers(data.users);
+          setTotalUsers(data.totalUsers);
+        } else {
+          setError('No users found');
+        }
+      } catch (error) {
+        setError(`Error fetching users: ${error.response ? error.response.data : error.message}`);
+        console.error('Fetch Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsersData();
+  }, [token, currentPage]);
+
+  const totalPages = Math.ceil(totalUsers / usersPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const openEditModal = (user) => {
+    setCurrentUser(user); // Set the user to be edited
+    setIsEditModalOpen(true); // Open the modal
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false); // Close the modal
+    setCurrentUser(null); // Reset the current user
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div className="user-tables">
       <header className="header">
@@ -40,11 +75,7 @@ function UserTables() {
           <div className="header-right">
             <div className="search-container">
               <Search className="icon search-icon" />
-              <input
-                type="text"
-                placeholder="Type here..."
-                className="search-input"
-              />
+              <input type="text" placeholder="Type here..." className="search-input" />
             </div>
             <button className="icon-button">
               <Settings className="icon" />
@@ -74,8 +105,8 @@ function UserTables() {
                     <td className="table-cell">
                       <div className="user-info">
                         <img
-                          src={user.avatar}
-                          alt=""
+                          src={user.profilePicture ? user.profilePicture : `https://ui-avatars.com/api/?name=${user.name.charAt(0)}&background=random&color=fff`}
+                          alt="avatar"
                           className="avatar"
                         />
                         <div>
@@ -84,7 +115,6 @@ function UserTables() {
                         </div>
                       </div>
                     </td>
-               
                     <td className="table-cell">
                       <span
                         className={`status ${user.status === "online" ? "online" : "offline"}`}
@@ -92,29 +122,72 @@ function UserTables() {
                         {user.status}
                       </span>
                     </td>
-                    <td className="table-cell">{user.employed}</td>
-                    <td class="table-cell-actions">
-                            <button class="icon-button">
-                                <Edit class="lucide lucide-edit" />
-                            </button>
-                            <button class="icon-button">
-                                <Trash class="lucide lucide-trash" />
-                            </button>
-                            </td>
-
+                    <td className="table-cell">
+                      {new Date(user.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="table-cell-actions">
+                      <button className="icon-button" onClick={() => openEditModal(user)}>
+                        <Edit className="lucide lucide-edit" />
+                      </button>
+                      <button className="icon-button">
+                        <Trash className="lucide lucide-trash" />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {/* Pagination */}
           <div className="pagination">
-            <button className="pagination-button">Previous</button>
-            <button className="pagination-button active">1</button>
-            <button className="pagination-button">2</button>
-            <button className="pagination-button">3</button>
-            <button className="pagination-button">Next</button>
+            <button
+              className="pagination-button"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index + 1}
+                className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              className="pagination-button"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
           </div>
         </div>
+
+        {/* Modal Overlay */}
+        {isEditModalOpen && currentUser && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h3>Edit User</h3>
+              <form className="edit-form">
+                <div className="form-group">
+                  <label>Name</label>
+                  <input type="text" defaultValue={currentUser.name} />
+                </div>
+                <div className="form-group">
+                  <label>Email</label>
+                  <input type="email" defaultValue={currentUser.email} />
+                </div>
+                {/* Add other fields you want to edit */}
+                <button type="submit" className="submit-button">Save</button>
+              </form>
+              <button className="close-button" onClick={closeEditModal}>Close</button>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

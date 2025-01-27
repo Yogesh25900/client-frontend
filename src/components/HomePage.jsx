@@ -87,7 +87,10 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+
+
         <div className="dashboard-grid">
+
           <div className="welcome-card">
             <div className="welcome-content">
               <p className="welcome-subtitle">Welcome back,</p>
@@ -101,9 +104,10 @@ export default function HomePage() {
             </div>
             <div className="welcome-blur"></div>
           </div>
+          
           <div className="satisfaction-card">
             <h3 className="card-title">Satisfaction Rate</h3>
-            <p className="card-subtitle">From all projects</p>
+            <p className="card-subtitle">From all Users</p>
             <div className="satisfaction-chart">
               <div className="satisfaction-value">
                 <span>95%</span>
@@ -117,19 +121,7 @@ export default function HomePage() {
               </svg>
             </div>
           </div>
-          <div className="referral-card">
-            <h3 className="card-title">Referral Tracking</h3>
-            <div className="referral-stats">
-              <div className="referral-stat">
-                <p className="stat-label">Invited</p>
-                <p className="stat-number">145</p>
-              </div>
-              <div className="referral-stat">
-                <p className="stat-label">Bonus</p>
-                <p className="stat-number">1,465</p>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </main>
      

@@ -1,5 +1,14 @@
 /* Sidebar container */
+.appcontainer {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
 .sidebar {
+    position: sticky;
+    top: 0;
+
     width: 16rem; /* Equivalent to w-64 */
     min-height: 100vh; /* Equivalent to min-h-screen */
     background-color: #0f0b1d;
@@ -7,6 +16,8 @@
     padding: 1.5rem; /* Equivalent to p-6 */
     display: flex;
     flex-direction: column;
+    overflow-y: auto; /* Make sure the content scrolls if it overflows */
+
   }
   
   /* Logo section */
@@ -17,6 +28,34 @@
     margin-bottom: 2rem; /* Equivalent to mb-8 */
   }
   
+  .help-section {
+    color: white; /* Adjust text color */
+  }
+  
+  .help-header {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between the icon and text */
+  }
+  
+  .help-icon {
+    display: inline-flex; /* Align icon inline */
+  }
+  
+  .help-text {
+    margin: 0; /* Remove default margin from h3 */
+    font-size: 16px; /* Adjust the size of the text */
+  }
+  
+  .help-description {
+    margin-top: 8px; /* Optional: Adds space between the text lines */
+    font-size: 14px; /* Adjust the font size for description */
+    color: #A0A0A0; /* Lighter color for description */
+  }
+  
+  .help-section{
+    height: 100px;
+  }
   .sidebar .logo .logo-icon {
     width: 2rem;
     height: 2rem;

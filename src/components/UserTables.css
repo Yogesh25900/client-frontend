@@ -11,6 +11,14 @@
     border-bottom: 1px solid #333;
     padding: 16px;
   }
+
+  .avatar {
+    width: 50px;  /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    object-fit: cover; /* This ensures the image doesn't stretch */
+    border-radius: 50%; /* Optional: makes the image circular */
+  }
+  
   
   .header-content {
     display: flex;
@@ -237,5 +245,64 @@
   /* Hover effect on icons (scale only the icon) */
   .icon-button:hover .lucide {
     transform: scale(1.2); /* Increase icon size on hover */
+  }
+  
+
+  /* Modal overlay styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(36, 35, 35, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #243973;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-form{
+    background: #1c3754;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .close-button {
+    margin-top: 10px;
+    background: #161b66;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
   

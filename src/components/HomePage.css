@@ -1,8 +1,10 @@
 .app {
     min-height: 100vh;
-    background-color: #0B1437;
+    background: linear-gradient(60deg, rgba(12, 13, 13, 0.85), rgba(7, 62, 157, 0.9));
     color: white;
+    padding: 20px; /* Optional for spacing */
   }
+  
   header {
     border-bottom: 1px solid rgba(31, 41, 55, 0.5);
     padding: 1rem 1.5rem;
@@ -123,6 +125,8 @@
     border-radius: 1rem;
     background: linear-gradient(to right, #2563EB, #60A5FA);
     padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(2, 0, 0, 0.2); /* Soft shadow for depth */
+
   }
   .welcome-content {
     position: relative;
@@ -161,12 +165,15 @@
     background-color: rgba(59, 130, 246, 0.3);
     filter: blur(24px);
   }
-  .satisfaction-card,
-  .referral-card {
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  .satisfaction-card {
+    background: rgba(255, 255, 255, 0.2); /* Transparent background */
+    backdrop-filter: blur(10px);         /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
     border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(2, 0, 0, 0.2); /* Soft shadow for depth */
 
   }
   .card-title {
@@ -180,6 +187,7 @@
   }
   .satisfaction-chart {
     margin-top: 1rem;
+    margin-left: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -229,7 +237,14 @@
     .stats-grid {
       grid-template-columns: 1fr;
     }
+    .satisfaction-chart{
+        margin-left: 100px;
+    }
     .dashboard-grid {
       grid-template-columns: 1fr;
     }
   }
+
+
+
+  

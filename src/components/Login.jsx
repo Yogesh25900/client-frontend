@@ -7,23 +7,19 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await loginUser({ email, password });
-      const { token } = response.data;
 
-      if (token) {
+  e.preventDefault();
+  try {
+    const response = await loginUser({ email, password });
 
-        localStorage.setItem('authToken', token); // Store token in localStorage
-        navigate('/dashboard'); // Redirect to dashboard
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+    // Navigate to the dashboard after successful login
+    navigate('/dashboard');
+  } catch (error) {
+    console.error('Login failed:', error);
+  }
+
   };
-
   return (
     <form onSubmit={handleLogin}>
       <input
