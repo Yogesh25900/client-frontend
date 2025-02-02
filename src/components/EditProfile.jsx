@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import "./EditProfile.css";
+import { useOutletContext } from 'react-router-dom';
+
+import { getUserDetails } from "../api/AuthService";
+
 
 const EditProfile = () => {
+  const { userId } = useOutletContext(); // Get the user ID passed from the Dashboard
+
+  // Log userId to ensure it is being passed correctly
+  console.log("User ID received in EditProfile:", userId);
+
+  const [userDetails, setUserDetails] = useState(null);
   const [formData, setFormData] = useState({
     name: "John Doe",
     title: "UI/UX Engineer",
     phone: "9910XXXXXX",
     email: "info@example.com",
-    website: "www.example.coms",
+    website: "www.example.com",
   });
 
   const handleInputChange = (e) => {
@@ -19,6 +29,27 @@ const EditProfile = () => {
     e.preventDefault();
     alert("Profile updated successfully!");
   };
+
+  // Run fetchUserData only if userId is valid
+  useEffect(() => {
+    if (!userId) {
+      console.error("User ID is missing!");
+      return;
+    }
+
+    const fetchUserData = async () => {
+      try {
+        console.log("Fetching user data for userId:", userId);
+        const data = await getUserDetails(12); // Pass the user ID to fetch data
+        console.log("Fetched user details:", data); // Log the fetched data for debugging purposes
+        setUserDetails(data); // Update state with fetched data if needed
+      } catch (error) {
+        console.error("Failed to fetch user details:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]); // Only run when userId changes
 
   return (
     <div className="edit-profile-container">

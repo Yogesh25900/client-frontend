@@ -6,7 +6,10 @@ import HomePage from "./components/HomePage";
 import ProfilePage from "./components/ProfilePage";
 import SettingsPage from "./components/SettingsPage";
 import UserTables from "./components/UserTables";
+import ImageUploadForm from "./components/ImageUploadForm ";
+
 import './App.css'
+import EditProfile from "./components/EditProfile";
 function App() {
   return (
     <Router>

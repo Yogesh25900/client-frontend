@@ -1,29 +1,31 @@
-import {React, useEffect} from "react";
-import { Routes, Route ,useNavigate} from "react-router-dom";
+import { React, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "./Navabr";
-const jwtDecode = await import("jwt-decode").then((module) => module.default);
-import axios from 'axios';
-
+import { validateToken } from "../api/AuthService"; // Imported validation function
 import "./Dashboard.css";
 import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-//   const navigate = useNavigate();
+  const [extractedUserId, setExtractedUserId] = useState(null); // State to hold the extracted userId
+  const navigate = useNavigate();
 
-//   useEffect(() => {
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        const response = await validateToken();
+        console.log("Token is valid");
+        const userId = response.userId; // Assuming the userId is in the response
+        console.log("Extracted user id: " + userId);
+        setExtractedUserId(userId); // Set the userId in the state
+      } catch (error) {
+        console.error("Token validation failed:", error);
+        navigate("/"); // Redirect to login if token is invalid
+      }
+    };
 
-//   const validateToken = async () => {
-//     try {
-//       await axios.get('http://localhost:3000/auth/verify-token', { withCredentials: true });
-//       console.log("Token is valid");
-//     } catch (error) {
-//       console.error("Token validation failed:", error.response?.data?.message || error.message);
-//       navigate('/'); // Redirect to login if validation fails
-//     }
-//   };
+    checkToken(); // Call the function to check token validity
+  }, [navigate]);
 
-//   validateToken();
-// }, [navigate]);
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
@@ -33,7 +35,8 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="dashboard-main">
-      <Outlet />
+        {/* Passing extractedUserId as context to the Outlet */}
+        <Outlet context={extractedUserId} />
       </div>
     </div>
   );

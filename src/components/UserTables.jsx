@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Search, Settings, Bell, Home } from "lucide-react";
 import './UserTables.css';
 import { Edit, Trash } from "lucide-react";
-import { fetchAllUsers } from '../services/AuthService';
+import { fetchAllUsers } from '../api/AuthService';
 
 function UserTables() {
   const [users, setUsers] = useState([]);
