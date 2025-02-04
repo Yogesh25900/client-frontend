@@ -1,97 +1,136 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './Chat.css'
+import { useOutletContext } from 'react-router-dom';
 
 const Chat = () => {
-  const [userQuery, setUserQuery] = useState('');
-  const [assistantReply, setAssistantReply] = useState(''); // Initial placeholder text
+  const userid = useOutletContext() || null;
+  const [querytext, setquerytext] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-  const dropdownRef = useRef(null);
+  const [isTyping, setIsTyping] = useState(false);
+  const [currentReplyIndex, setCurrentReplyIndex] = useState(null); // Track which reply is being typed
+  const chatContainerRef = useRef(null); 
 
-  // Fetch chat history on component mount
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
   useEffect(() => {
-    fetchChatHistory();
-  }, []);
+    if (userid) fetchChatHistory();
+  }, [userid]);
 
-  // Fetch chat history from the server
   const fetchChatHistory = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/chat-history/get-chat-history');
-      setChatHistory(response.data);
+      const response = await axios.post('http://localhost:3000/api/chat-history/get-chat',{userid});
+      setChatHistory(Array.isArray(response.data) ? response.data : []);
+      scrollToBottom(); 
     } catch (error) {
       console.error('Error fetching chat history:', error);
     }
   };
 
-  // Handle input change
+  const typeLetterByLetter = (text, index) => {
+    let currentIndex = 0;
+    setIsTyping(true);
+
+    const interval = setInterval(() => {
+      setChatHistory((prevHistory) => {
+        const newHistory = [...prevHistory];
+        newHistory[index] = { ...newHistory[index], currentReply: newHistory[index].response[0].responsetext.substring(0, currentIndex + 1) };
+        return newHistory;
+      });
+      currentIndex++;
+      if (currentIndex === text.length) {
+        clearInterval(interval);
+        setIsTyping(false);
+      }
+    }, 100); // Adjust the speed here (ms)
+  };
+
   const handleInputChange = (e) => {
-    setUserQuery(e.target.value);
+    setquerytext(e.target.value);
   };
 
   const submitQuery = async () => {
-    if (!userQuery.trim()) return;  // Prevent sending empty queries
-  
-    try {
-      const response = await axios.post('http://localhost:3000/api/chat-history/save-chat-history', { userQuery });
-  
-      // Log the entire response to see what data is coming back
-      const { chatEntry } = response.data; // Destructure to get chatEntry
-      const { user_query, assistant_reply } = chatEntry;
+    if (!querytext.trim()) return; // Prevent sending empty queries
 
-      if (user_query && assistant_reply) {
-        setChatHistory((prevHistory) => [{ user_query, assistant_reply }, ...prevHistory]);
-        setUserQuery('');
-      } else {
-        console.error('Response does not contain expected data:');
-      }
+    try {
+      const res = await axios.post('http://localhost:3000/api/chat-history/save-chat', { userid, querytext });
+
+      const { query, response } = res.data;
+      if (!query || !response) return;
+
+      const assistantResponseText = response.responsetext || 'No response received';
+
+      setquerytext(''); // Reset input field
+
+      fetchChatHistory();
+
+      // Start typing effect for the assistant's reply
+      const currentIndex = chatHistory.length;
+      setCurrentReplyIndex(currentIndex); // Set current chat history index
+      typeLetterByLetter(assistantResponseText, currentIndex);
+
     } catch (error) {
       console.error('Error sending query:', error);
     }
   };
 
-  // Handle Enter key press for submitting query
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       submitQuery();
     }
   };
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatHistory]); 
+
   return (
     <div className='chat-main-container'>
-      <div className="chat-history">
-        {chatHistory.slice(0).reverse().map((chat, index) => (
+      <div className="chat-history" ref={chatContainerRef}>
+        {chatHistory.slice(0).map((chat, index) => (
           <div key={index} className="chat-entry">
             <div className="user-query">
               <strong>User:</strong>
-              <p>{chat.user_query}</p>
+              <p>{chat.querytext}</p> {/* Display the user query */}
             </div>
-            <div className="assistant-reply">
-              <strong>Assistant:</strong>
-              <p>{chat.assistant_reply}</p>
-            </div>
+            {chat.response && chat.response.length > 0 && (
+              <div className="assistant-reply">
+                <strong>Assistant:</strong>
+                <p>
+                  {chat.currentReply ? chat.currentReply : chat.response[0].responsetext}
+                  {/* Show the assistant's current reply during typing effect */}
+                </p>
+              </div>
+            )}
           </div>
         ))}
-      
+      </div>
 
-    </div>
-    
-    <div className="search-container">
-        <input
+      <div className="search-container">
+        <textarea
           type="text"
           placeholder="Type your query here..."
           className="search-box"
-          value={userQuery}
+          value={querytext}
           onKeyDown={handleKeyDown}
           onChange={handleInputChange}
         />
-        <button className="send-button" onClick={submitQuery}>
-          <i className="fas fa-paper-plane"></i>
-        </button>
-        <button className="voice-button" title="Click to Speak">
-          <i className="fas fa-microphone"></i>
-        </button>
-      </div>
+        <div className="button-container">
+    <div className="send-button" onClick={submitQuery}>
+      <i className="fas fa-paper-plane"></i> {/* Send Icon */}
+    </div>
+    <div className="voice-button" title="Click to Speak">
+      <i className="fas fa-microphone"></i> {/* Microphone Icon */}
+    </div>
   </div>
+      </div>
+    </div>
   );
 };
 
