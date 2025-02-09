@@ -1,0 +1,136 @@
+.weather-card {
+    background: rgba(255, 255, 255, 0.2); /* Transparent background */
+    border-radius: 10px;
+    padding: 30px;
+    width: 600px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    margin-left: 10px;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .weather-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+ 
+  .weather-condition img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .weather-stats {
+    margin-top: 20px;
+  }
+  
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .stat-label {
+    font-weight: bold;
+  }
+  
+
+  .weather-card {
+    position: relative; /* Make sure the sync icon is positioned relative to the card */
+  }
+  
+  .sync-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: flex; /* Ensure the icon's center is aligned */
+    justify-content: center;
+    align-items: center;
+    width: 30px;  /* Set width and height for the icon */
+    height: 30px;
+  }
+  
+  .syncing {
+    animation: rotate 2s linear infinite; /* Rotate icon when syncing */
+  }
+  
+
+
+.icon {
+  font-size: 1.2rem; /* Adjust icon size */
+  color: #CCCCCC;
+}
+
+
+.weather-card {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .weather-condition {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .weather-condition img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .location-info {
+    display: flex;
+    align-items: flex-start; /* Align icon and text at the top */
+    gap: 15px; /* Add space between the icon and text */
+  }
+  
+  .location-info .icon {
+    /* Ensure the icon is a specific size */
+    margin-top: 5px; /* Adjust this to vertically align the icon better if needed */
+  }
+  
+  .location-details {
+        display: flex;
+    flex-direction: column;
+  }
+  
+  .location-details span {
+    margin-left: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .coordinates {
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 50px;
+  }
+  
+.pin-icon{
+    margin-top: 2px;
+}
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

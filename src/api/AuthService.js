@@ -69,3 +69,76 @@ export const updateUserDetails = async (userId, userData) => {
   const response = await axios.put(`${API_URL}api/users/${userId}`, userData);
   return response.data;
 };
+
+
+
+//tasks
+export const fetchUserTasks = async (userID) => {
+  try {
+    const response = await axios.post(`${API_URL}api/tasks/`,{userID});
+    return response.data; // Returns the list of tasks
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+    return [];
+  }
+};
+
+
+export const addTask = async (userID, taskname, taskdescription, status, due_date) => {
+  try {
+    const response = await axios.post(`${API_URL}api/tasks/createtask`, {
+      userID,
+      taskname,
+      taskdescription,
+      status,
+      due_date
+    });
+
+    return response.data; // Returns the created task object
+  } catch (error) {
+    console.error("Error adding task:", error);
+    return null; // Returns null if there's an error
+  }
+};
+
+
+
+
+
+export const updateTask = async (taskid, taskname, taskdescription, status, due_date) => {
+  try {
+    // Convert due_date to YYYY-MM-DD format if it's not already
+    const formattedDate = new Date(due_date).toISOString().split('T')[0];
+
+    const response = await axios.put(`${API_URL}api/tasks/updatetask/${taskid}`, {
+      taskname,
+      taskdescription,
+      status,
+      due_date: formattedDate, // Ensure proper date format
+    });
+
+    return response.data; // Return success message or updated task
+  } catch (error) {
+    console.error("Error updating task:", error);
+
+    // Extract a meaningful error message
+    throw error.response?.data?.error || "Failed to update task"; 
+  }
+};
+
+
+
+export const deleteTask = async (taskid) => {
+  try {
+    // Send a DELETE request to the server to delete the task with the provided taskid
+    const response = await axios.delete(`${API_URL}api/tasks/deletetask/${taskid}`);
+
+    // Return the success message from the API response
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting task:", error);
+
+    // Extract and throw a meaningful error message
+    throw error.response?.data?.error || "Failed to delete task";
+  }
+};
