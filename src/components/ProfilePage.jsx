@@ -86,7 +86,6 @@ const ProfilePage = () => {
   // Handle file upload submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    showSuccessToast("Profile Picture Updated successfully!");
 
 
     if (!image) {
@@ -105,7 +104,7 @@ const ProfilePage = () => {
 
       
 
-      setMessage(`Image uploaded successfully: ${res.data.filePath}`);
+      // setMessage(`Image uploaded successfully: ${res.data.filePath}`);
       user.profilePicture = res.data.filePath;
 
       console.log("new profile picture: " + res.data.filePath);
@@ -123,7 +122,8 @@ const ProfilePage = () => {
         return showErrorToast("Phone number must be exactly 10 digits!");
       } 
       const response = await updateUserDetails(userid, user); // API call to update user
-      setMessage("Profile updated successfully!"); // Show success message
+      showSuccessToast("Profile updated successfully")
+      // setMessage("Profile updated successfully!"); // Show success message
       setError(null); // Clear any errors
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update profile");
@@ -143,19 +143,8 @@ const ProfilePage = () => {
         <header className="header">
           <div className="header-left">
             <h1 className="title">Edit User Profile</h1>
-            <a href="#" className="preview-link">Preview</a>
           </div>
-          <div className="header-right">
-            <button className="icon-btn">
-              <Sun className="icon" />
-            </button>
-            <button className="icon-btn">
-              <MessageCircle className="icon" />
-            </button>
-            <button className="icon-btn">
-              <Bell className="icon" />
-            </button>
-          </div>
+      
         </header>
         <div className="content">
           <div className="profile-section">
@@ -170,20 +159,24 @@ const ProfilePage = () => {
                   <p className="label">{user?.name || "Your Name"}</p>
                   <p className="description">This will be displayed on your profile</p>
                   <div className="action-buttons">
-                    <input
+                 
+                  <label htmlFor="file-upload" className="file-input-label">
+                         Choose Image
+                    </label>
+                      <input
                       type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                      className="file-input"
-                    />
+                  id="file-upload"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="file-input"/>
+<span className="file-name">{image ? image.name : "No file chosen"}</span>
+
             <button className="upload-btn" onClick={handleSubmit}>Upload New</button>
           {/* <ToastNotification />               */}
       </div>
                 </div>
               </div>
-              <div className="cover-image-container">
-                {/* Cover image container */}
-              </div>
+            
             </div>
             <div className="form-section">
               <div className="form-item">
@@ -237,39 +230,7 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
-          <div className="bio-section">
-            <div className="bio-card">
-              <h2 className="section-title">Bio</h2>
-              <textarea className="textarea" placeholder="Write something about yourself..."></textarea>
-              <h2 className="section-title">Industry/Interests</h2>
-              <div className="tags-container">
-                {[
-                  "UI Design",
-                  "Framer",
-                  "Startups",
-                  "UX",
-                  "Crypto",
-                  "Mobile Apps",
-                  "Webflow",
-                ].map((tag) => (
-                  <span key={tag} className="tag">
-                    {tag}
-                    <X className="icon" />
-                  </span>
-                ))}
-              </div>
-              <button className="add-more-btn">+ Add more</button>
-            </div>
-            <div className="bio-card">
-              <h2 className="section-title">Social Media accounts</h2>
-              <div className="social-media-inputs">
-                <input type="url" className="inputprofile" placeholder="Twitter URL" />
-                <input type="url" className="inputprofile" placeholder="Instagram URL" />
-                <input type="url" className="inputprofile" placeholder="LinkedIn URL" />
-              </div>
-              <button className="add-more-btn">+ Add more</button>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

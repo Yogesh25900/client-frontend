@@ -1,239 +1,189 @@
-/* General styles */
+/* Ensure full-page responsiveness */
+/* Main container */
 .app-container {
-    min-height: 100vh;
-    background: linear-gradient(60deg, rgba(12, 13, 13, 0.85), rgba(7, 62, 157, 0.9));
-    padding: 1.5rem;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  background-color: #f4f4f4;
+  padding: 20px; /* Prevents content from sticking to the edges */
+}
+
+
+/* Main Content Box */
+.max-width-container {
+  width: 60%;
+  max-height: 100vh;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Profile Section */
+.profile-section {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Profile Image Container */
+.profile-image-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Profile Image */
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+/* Form Section */
+.form-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input Fields */
+.inputprofile {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* File Upload */
+.file-input {
+  display: none; /* Hides default input */
+}
+
+.file-input-label {
+  display: inline-block;
+  background-color: #4CAF50; /* Green color */
+  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.file-input-label:hover {
+  background-color: #45a049;
+}
+
+/* Button Styling */
+.upload-btn, .save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-btn {
+  background: #007bff;
+  color: white;
+}
+
+.upload-btn:hover {
+  background: #0056b3;
+}
+
+.save-btn {
+  background: #28a745;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #218838;
+}
+
+/* Success & Error Messages */
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
   .max-width-container {
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 80%;
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .title {
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-  
-  .preview-link {
-    color: #2563eb;
-    font-size: 0.875rem;
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .icon-btn {
-    padding: 0.5rem;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .icon-btn:hover {
-    background-color: #f3f4f6;
-  }
-  
-  .icon {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-  
-  /* Content section */
-  .content {
-    display: flex;
-    gap: 1.5rem;
-  }
-  
+
   .profile-section {
-    background: rgba(227, 220, 220, 0.2); /* Transparent background */
-    backdrop-filter: blur(10px);         /* Blur effect */
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 20px;
-    border-radius: 12px;
-
-    width: 66.6667%;
-    box-shadow: 0 1px 2px rgba(95, 93, 93, 0.1);
-    padding: 1.5rem;
-  }
-  
-  .profile-header {
-    position: relative;
-    margin-bottom: 1.5rem;
-  }
-  
-  .profile-image-container {
-    position: absolute;
-    top: 6rem;
-    left: 1.5rem;
-    z-index: 10;
-  }
-  
-  .profile-image {
-    width: 6rem;
-    height: 6rem;
-    object-fit: cover; /* Ensures the image maintains its aspect ratio */
-
-    border-radius: 9999px;
-    border: 4px solid #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-actions {
-    margin-top: 0.5rem;
-  }
-  
-  .label {
-    width: auto;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #eef5f2
-  }
-  
-  .description {
-    font-size: 0.75rem;
-    color: #c0c6d1;
-    margin-bottom: 0.5rem;
-  }
-  
-  .action-buttons {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .upload-btn {
-    width: 150px;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.875rem;
-    background-color: #2563eb;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-  }
-  
-  .formbuttonsave{
-    display: flex;
-    justify-content: center; /* Horizontal alignment */
-    align-items: center;   
-  }
-
-  .save-btn {
-    width: 100px;
-    height: 40px;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.875rem;
-    background-color: #2563eb;
-    color: #fff;
-    border-radius: 0.375rem;
-  }
-  
-  .cover-image-container {
-    position: relative;
-    height: 12rem;
-    background: linear-gradient(to right, #f9a8d4, #9d4edd, #fb923c);
-    border-radius: 0.5rem;
-  }
-  
-
-  
-  /* Form section */
-  .form-section {
-    margin-top: 7rem;
-  }
-  
-  .form-item {
-    margin-bottom: 1.5rem;
-  }
-  
-  .inputprofile {
-    color: #080808;
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #efeded;
-    border: 1px solid #3d3e41;
-    border-radius: 0.375rem;
-  }
-  
-  .textarea {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid #c6cad2;
-    border-radius: 0.375rem;
-    min-height: 100px;
-  }
-  
-  .bio-section {
-
-
-    
-    width: 33.3333%;
-    display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .bio-card {
-    background: rgba(255, 255, 255, 0.2); /* Transparent background */
-    backdrop-filter: blur(10px);         /* Blur effect */
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-  }
-  
-  .section-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-  
-  .tags-container {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-  
-  .tag {
-    background-color: #e0e7ff;
-    color: #4f46e5;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    display: flex;
     align-items: center;
   }
-  
-  .tag .icon {
-    margin-left: 0.25rem;
+
+  .profile-image-container, .form-section {
+    width: 100%;
   }
-  
-  .add-more-btn {
-    color: #eaeff9;
-    background-color: #2563eb;
-    border: none;
-    font-size: 0.875rem;
-    cursor: pointer;
-    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .max-width-container {
+    width: 90%;
+    padding: 15px;
   }
-  
-  .social-media-inputs input {
-    margin-bottom: 1rem;
+
+  .header h1 {
+    font-size: 20px;
   }
-  
+
+  .upload-btn, .save-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .max-width-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+}

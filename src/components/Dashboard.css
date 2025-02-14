@@ -1,18 +1,31 @@
 /* Dashboard.css */
 .dashboard-container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .dashboard-sidebar {
-    width: 250px;
-    background-color: #333;
-    color: #fff;
-  }
-  
-  .dashboard-main {
-    flex: 1;
-    position: relative;
-    background: #f4f4f4;
-  }
+  display: flex;
+  transition: all 0.3s ease; /* Smooth transition */
+  width: 100vw;
+  height: 100vh;
+}
+
+.dashboard-sidebar {
+  width: 250px; /* Adjust as per your design */
+  transition: width 0.3s ease;
+}
+
+.dashboard-sidebar.closed {
+  width: 0;
+}
+
+.dashboard-main {
+  flex-grow: 1;
+  transition: margin-left 0.3s ease;
+}
+
+.dashboard-main.collapsed {
+  width: calc(100% - 10px);
+}
+
+.dashboard-main.expanded {
+  width: 10px;
+}
+
   

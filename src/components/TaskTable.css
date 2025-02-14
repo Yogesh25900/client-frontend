@@ -1,0 +1,331 @@
+.tasks {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    margin-top: 0;
+    /* justify-content: center; */
+    align-items: center;
+    min-height: 100vh; /* En
+    wsures it covers the full screen */
+    width: 100%;
+    padding: 20px;
+    background-color: #1b1b1b;
+    color: white;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    width: 100%;
+  }
+  
+.task-container {
+    width: 80%;
+    padding: 20 px;
+    border-radius: 12px;
+    background-color: #111c44;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 20px
+  }
+  
+  .add-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 115px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .task-table th, .task-table td {
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .task-table th {
+    background-color: #2e4384;
+  }
+  
+  .edit-btn, .delete-btn {
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 4px;
+  }
+
+  td:last-child {
+    display: flex;
+    gap: 5px; /* Adds spacing between buttons */
+    align-items: center;
+}
+  
+  .edit-btn {
+    background-color: #ffc107;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+/* Basic modal styling */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: background-color 0.3s;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative; /* Added for positioning the close button */
+  transition: background-color 0.3s;
+}
+
+/* Dark Mode for Overlay Content */
+.overlay.dark-mode .overlay-content {
+  background: #333;
+}
+
+/* Close button aligned to the top-right corner */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  display: flex;              /* Use flexbox to center content */
+
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size:24px;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #ccc;
+}
+
+/* Input Fields */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+input.dark-mode,
+textarea.dark-mode,
+select.dark-mode {
+  background: #555;
+  color: white;
+  border: 1px solid #777;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* button:hover {
+  background-color: #45a049;
+} */
+
+button.close-btn {
+  background-color: #f44336;
+}
+
+button.close-btn:hover {
+  background-color: #e53935;
+}
+
+button.dark-mode {
+  background-color: #6200ea;
+}
+
+button.dark-mode:hover {
+  background-color: #3700b3;
+}
+
+/* Modal Title */
+h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.overlay.dark-mode h3 {
+  color: white;
+}
+
+/* Light/Dark Mode Switch */
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* General overlay effect */
+.overlay-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-content.dark-mode {
+  background: #333;
+}
+
+/* Form Elements */
+input, textarea, select {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+  color: #333;
+  font-family: "Poppins";
+}
+
+input.dark-mode,
+textarea.dark-mode,
+select.dark-mode {
+  background-color: #555;
+  color: white;
+  border-color: #777;
+}
+
+/* Themed button */
+button {
+  background-color: #4caf50;
+  color: white;
+}
+
+button.dark-mode {
+  background-color: #6200ea;
+}
+
+button.close-btn {
+  background-color: #f44336;
+}
+
+button.close-btn.dark-mode {
+  background-color: #bb0000;
+}
+
+
+
+
+
+@media (max-width: 1024px) {
+    .task-container {
+        width: 90%;
+    }
+
+    .add-btn {
+        width: 100px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .task-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .task-table th, .task-table td {
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    td:last-child {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .edit-btn, .delete-btn {
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    .overlay-content {
+        width: 95%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .task-container {
+        width: 95%;
+    }
+
+    .task-header {
+        padding: 10px;
+    }
+
+    .task-table {
+        font-size: 12px;
+    }
+
+    .add-btn {
+        width: 90px;
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    .overlay-content {
+        width: 100%;
+    }
+}

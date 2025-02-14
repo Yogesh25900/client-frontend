@@ -29,6 +29,7 @@ const Chat = () => {
       const response = await axios.post('http://localhost:3000/api/chat-history/get-chat', { userID });
       if (Array.isArray(response.data)) {
         setChatHistory(response.data);
+        console.log('chat history',response.data);
       } else {
         setChatHistory([]);
       }

@@ -1,0 +1,706 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.forms-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.signin-signup {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 75%;
+  width: 50%;
+  transition: 1s 0.7s ease-in-out;
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 5;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0rem 5rem;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+form.sign-up-form {
+  opacity: 0;
+  z-index: 1;
+}
+
+form.sign-in-form {
+  z-index: 2;
+}
+
+.title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+
+
+.social-text {
+  padding: 0.7rem 0;
+  font-size: 1rem;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon {
+  height: 46px;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.45rem;
+  color: #333;
+  border-radius: 50%;
+  border: 1px solid #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  color: #4481eb;
+  border-color: #4481eb;
+}
+
+.btn {
+  width: 150px;
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background-color: #4d84e2;
+}
+.panels-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.container:before {
+  content: "";
+  position:absolute;
+  height: 2000px;
+  width: 2000px;
+  top: -10%;
+  right: 48%;
+  transform: translateY(-50%);
+  background-image: linear-gradient(-45deg, #47494b 0%, #04befe 100%);
+  transition: 1.8s ease-in-out;
+  border-radius: 50%;
+  z-index: 6;
+}
+
+.image {
+  width: 100%;
+  transition: transform 1.1s ease-in-out;
+  transition-delay: 0.4s;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  text-align: center;
+  z-index: 6;
+}
+
+.left-panel {
+  pointer-events: all;
+  padding: 3rem 17% 2rem 12%;
+}
+
+.right-panel {
+  pointer-events: none;
+  padding: 3rem 12% 2rem 17%;
+}
+
+.panel .content {
+  color: #fff;
+  transition: transform 0.9s ease-in-out;
+  transition-delay: 0.6s;
+}
+
+.panel h3 {
+  font-weight: 600;
+  line-height: 1;
+  font-size: 1.5rem;
+}
+
+.panel p {
+  font-size: 0.95rem;
+  padding: 0.7rem 0;
+}
+
+.btn.transparent {
+  margin: 0;
+  background: none;
+  border: 2px solid #fff;
+  width: 130px;
+  height: 41px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.right-panel .image,
+.right-panel .content {
+  transform: translateX(800px);
+}
+
+/* ANIMATION */
+
+.container.sign-up-mode:before {
+  transform: translate(100%, -50%);
+  right: 52%;
+}
+
+.container.sign-up-mode .left-panel .image,
+.container.sign-up-mode .left-panel .content {
+  transform: translateX(-800px);
+}
+
+.container.sign-up-mode .signin-signup {
+  left: 25%;
+}
+
+.container.sign-up-mode form.sign-up-form {
+  opacity: 1;
+  z-index: 2;
+}
+
+.container.sign-up-mode form.sign-in-form {
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.sign-up-mode .right-panel .image,
+.container.sign-up-mode .right-panel .content {
+  transform: translateX(0%);
+}
+
+.container.sign-up-mode .left-panel {
+  pointer-events: none;
+}
+
+.container.sign-up-mode .right-panel {
+  pointer-events: all;
+}
+
+@media (max-width: 870px) {
+  .container {
+    min-height: 800px;
+    height: 100vh;
+  }
+  .signin-signup {
+    width: 100%;
+    top: 95%;
+    transform: translate(-50%, -100%);
+    transition: 1s 0.8s ease-in-out;
+  }
+
+  .signin-signup,
+  .container.sign-up-mode .signin-signup {
+    left: 50%;
+  }
+
+  .panels-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+  }
+
+  .panel {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2.5rem 8%;
+    grid-column: 1 / 2;
+  }
+
+  .right-panel {
+    grid-row: 3 / 4;
+  }
+
+  .left-panel {
+    grid-row: 1 / 2;
+  }
+
+  .image {
+    width: 200px;
+    transition: transform 0.9s ease-in-out;
+    transition-delay: 0.6s;
+  }
+
+  .panel .content {
+    padding-right: 15%;
+    transition: transform 0.9s ease-in-out;
+    transition-delay: 0.8s;
+  }
+
+  .panel h3 {
+    font-size: 1.2rem;
+  }
+
+  .panel p {
+    font-size: 0.7rem;
+    padding: 0.5rem 0;
+  }
+
+  .btn.transparent {
+    width: 110px;
+    height: 35px;
+    font-size: 0.7rem;
+  }
+
+  .container:before {
+    width: 1500px;
+    height: 1500px;
+    transform: translateX(-50%);
+    left: 30%;
+    bottom: 68%;
+    right: initial;
+    top: initial;
+    transition: 2s ease-in-out;
+  }
+
+  .container.sign-up-mode:before {
+    transform: translate(-50%, 100%);
+    bottom: 32%;
+    right: initial;
+  }
+
+  .container.sign-up-mode .left-panel .image,
+  .container.sign-up-mode .left-panel .content {
+    transform: translateY(-300px);
+  }
+
+  .container.sign-up-mode .right-panel .image,
+  .container.sign-up-mode .right-panel .content {
+    transform: translateY(0px);
+  }
+
+  .right-panel .image,
+  .right-panel .content {
+    transform: translateY(300px);
+  }
+
+  .container.sign-up-mode .signin-signup {
+    top: 5%;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 570px) {
+  form {
+    padding: 0 1.5rem;
+  }
+
+  .image {
+    display: none;
+  }
+  .panel .content {
+    padding: 0.5rem 1rem;
+  }
+  .container {
+    padding: 1.5rem;
+  }
+
+  .container:before {
+    bottom: 72%;
+    left: 50%;
+  }
+
+  .container.sign-up-mode:before {
+    bottom: 28%;
+    left: 50%;
+  }
+}
+
+
+/* Social Icon container */
+.social-icon {
+  display: flex; /* Use flexbox to center content */
+  justify-content: center; /* Center the icon horizontally */
+  align-items: center; /* Center the icon vertically */
+  width: 50px; /* Adjust width of the circle */
+  height: 50px; /* Adjust height of the circle */
+  padding: 10px;
+  margin: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Apply a smooth color transition to all social icons */
+.social-icon i {
+  font-size: 20px;  /* Smaller icon size */
+  transition: color 0.3s ease, transform 0.3s ease; /* Transition for color and scaling */
+}
+
+/* Set default colors for the icons */
+.social-icon .fa-facebook-f {
+  color: #3b5998;  /* Facebook blue */
+}
+
+.social-icon .fa-twitter {
+  color: #1da1f2;  /* Twitter blue */
+}
+
+.social-icon .fa-google {
+  color: #db4437;  /* Google red */
+}
+
+.social-icon .fa-linkedin-in {
+  color: #0077b5;  /* LinkedIn blue */
+}
+
+/* Hover effect for the social icon container */
+.social-icon:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light background color */
+  transform: scale(1.1); /* Slightly enlarge the container */
+}
+
+/* Hover effect for all icons */
+.social-icon i:hover {
+  transform: scale(1.1); /* Slightly enlarge the icon */
+}
+
+/* Change color on hover for each icon */
+.social-icon .fa-facebook-f:hover {
+  color: #2d4373;  /* Darker Facebook blue */
+}
+
+.social-icon .fa-twitter:hover {
+  color: #0c85d0;  /* Darker Twitter blue */
+}
+
+.social-icon .fa-google:hover {
+  color: #c1351d;  /* Darker Google red */
+}
+
+.social-icon .fa-linkedin-in:hover {
+  color: #005582;  /* Darker LinkedIn blue */
+}
+
+
+.input-field {
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  display: flex; /* Align the icon and input on the same line */
+  align-items: center; /* Vertically center the icon and input */
+}
+
+.input-field i {
+  font-size: 20px;
+  color: #232323;
+  margin-right: 10px; /* Add space between the icon and the input */
+}
+
+.input-field input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 10px;
+  padding-left: 40px; /* To make space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 15px; /* More rounded corners */
+  font-size: 18px;
+  box-sizing: border-box;
+}
+
+.input-field input::placeholder {
+  color: transparent;
+}
+
+.input-field label {
+  position: absolute;
+  top: 50%;
+  left: 130px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #999;
+  /* margin-left: 100px; */
+  background-color: white; /* Background color for label */
+  transition: all 0.3s ease;
+}
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+  top: 5px;
+  left: 15px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: white; /* Keep background color when focused */
+}
+
+.input-field input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Hide the default placeholder text */
+.input-field input::placeholder {
+  color: transparent;
+}
+
+
+
+/* Style for input fields */
+.input-field input {
+  width: 100%; /* Full width for input */
+  max-width: 400px; /* Set a maximum width */
+  padding: 15px 10px 15px 30px; /* Padding for better spacing inside */
+  border: 1px solid #ccc;
+  border-radius: 8px; 
+  font-size: 18px; 
+  box-sizing: border-box; /* Includes padding in the width calculation */
+}
+
+/* Floating label when input is focused */
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+  color: #007bff;
+}
+
+/* Focused input field */
+.input-field input:focus {
+  border-color: #007bff; 
+  outline: none;
+}
+.input-field {
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  display: flex; /* Align icon and input in the same line */
+  align-items: center; /* Vertically center the icon and input */
+}
+
+.input-field i {
+  font-size: 20px;
+  color: #333; /* Dark gray or black color for the icon */
+  margin-right: 10px; /* Space between icon and input */
+  position: absolute; /* Position the icon inside the input field */
+  left: 15px; /* Align the icon to the left inside the input field */
+}
+
+.input-field input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 10px;
+  padding-left: 40px; /* Add space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 15px; /* Rounded corners */
+  font-size: 18px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.input-field input::placeholder {
+  color: transparent; /* Hide default placeholder */
+}
+
+
+
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+  top: 5px;
+  left: 15px;
+  font-size: 12px;
+  color: #007bff;
+  background-color: white; /* Keep background color when focused */
+}
+
+.input-field input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+.input-field {
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  display: flex; /* Align icon and input in the same line */
+  align-items: center; /* Vertically center the icon and input */
+}
+
+.input-field i {
+  font-size: 20px;
+  color: #333; /* Dark gray or black color for the icon */
+  margin-right: 10px; /* Space between icon and input */
+  position: absolute; /* Position the icon inside the input field */
+  left: 15px; /* Align the icon to the left inside the input field */
+}
+
+.input-field input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px 10px;
+  padding-left: 40px; /* Add space for the icon */
+  border: 1px solid #ccc;
+  border-radius: 15px; /* Rounded corners */
+  font-size: 18px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.input-field input::placeholder {
+  color: transparent; /* Hide default placeholder */
+}
+
+.input-field label {
+  position: absolute;
+ 
+  left: 10px; /* Shift label a little to the left */
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #999;
+  background-color: white; /* Background color for label */
+  padding: 0 5px; /* Smal   l padding to make background fit around label */
+  transition: all 0.3s ease;
+}
+
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+  top: 5px;
+  left: 40px; /* Keep it shifted to the left when focused */
+  font-size: 14px;
+  color: #007bff;
+
+  background-color: white; /* Keep background color when focused */
+}
+
+.input-field input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+
+.forms-center{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+\.social-icon {
+  color: #333; /* Set the icon color to black or any color you prefer */
+  background-color: #fff; /* Ensure background color is not interfering */
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: #a3a8ae; /* Change background color on hover */
+}
+.sign-up-form {
+  width: 100%;
+  max-width: 400px;  /* Set a max-width to control the form's width */
+  margin: 0 auto;  /* Horizontally centers the form */
+  padding: 20px;  /* Add some padding around the form */
+  box-sizing: border-box;  /* Include padding in width calculation */
+  background-color: #fff;  /* Optional background color */
+  border-radius: 10px;  /* Optional rounded corners */
+}
+
+.forms-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* This centers the input fields inside the form */
+  justify-content: center;
+}
+
+.sign-in-form{
+  width: 100%;
+  max-width: 400px;  /* Set a max-width to control the form's width */
+  margin: 0 auto;  /* Horizontally centers the form */
+  padding: 20px;  /* Add some padding around the form */
+  box-sizing: border-box;  /* Include padding in width calculation */
+  background-color: #fff;  /* Optional background color */
+  border-radius: 10px;
+}
+
+.error-label {
+    color: red;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .success {
+    color: green;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+
+ 
+.password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    top: 38%;
+    transform: translateX(93%);
+    
+    font-size: 18px;
+    cursor: pointer;
+    color: #888;
+  }
+  
+  .password-toggle-icon:hover {
+    color: #4e4d4d;
+  }

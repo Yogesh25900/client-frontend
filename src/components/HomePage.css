@@ -2,17 +2,18 @@
     min-height: 100vh;
     background: linear-gradient(60deg, rgba(12, 13, 13, 0.85), rgba(7, 62, 157, 0.9));
     color: white;
-    padding: 20px; /* Optional for spacing */
+    /* padding: 20px; Optional for spacing */
   }
   
   header {
     border-bottom: 1px solid rgba(31, 41, 55, 0.5);
     padding: 1rem 1.5rem;
   }
-  .header-content {
+  .header-contents {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0px;
   }
   .breadcrumb {
     display: flex;
@@ -34,15 +35,7 @@
   .search-container {
     position: relative;
   }
-  .search-icon {
-    position: absolute;
-    left: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9CA3AF;
-    width: 1rem;
-    height: 1rem;
-  }
+    
   input {
     background-color: #111C44;
     border-radius: 0.5rem;
@@ -117,6 +110,7 @@
     margin-top: 1.5rem;
     display: grid;
     gap: 1.5rem;
+    margin-top: 50px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   .welcome-card {
@@ -131,6 +125,7 @@
   .welcome-content {
     position: relative;
     z-index: 1;
+    padding: 20px;
   }
   .welcome-subtitle {
     color: rgba(255, 255, 255, 0.9);
@@ -170,7 +165,8 @@
     backdrop-filter: blur(10px);         /* Blur effect */
     -webkit-backdrop-filter: blur(10px); /* Safari support */
     border: 1px solid rgba(255, 255, 255, 0.3);
-
+    font-family: "Poppins";
+    color: #234172;
     border-radius: 1rem;
     padding: 2rem;
     box-shadow: 0 8px 32px rgba(2, 0, 0, 0.2); /* Soft shadow for depth */
@@ -185,54 +181,9 @@
     color: #9CA3AF;
     font-size: 0.875rem;
   }
-  .satisfaction-chart {
-    margin-top: 1rem;
-    margin-left: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 10rem;
-    width: 10rem;
-  }
-  .satisfaction-value {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.875rem;
-    font-weight: 700;
-  }
-  .satisfaction-chart svg {
-    height: 100%;
-    width: 100%;
-    transform: rotate(-90deg);
-  }
-  .satisfaction-chart path {
-    fill: none;
-    stroke: #2563EB;
-    stroke-width: 2.5;
-    stroke-dasharray: 95, 100;
-  }
-  .referral-stats {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .referral-stat {
-    margin-bottom: 1rem;
-  }
-  .stat-label {
-    color: #9CA3AF;
-    font-size: 0.875rem;
-    margin-bottom: 0.25rem;
-  }
-  .stat-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
+ 
+  
+ 
   @media (max-width: 768px) {
     .stats-grid {
       grid-template-columns: 1fr;

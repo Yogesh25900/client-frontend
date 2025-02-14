@@ -1,5 +1,4 @@
 import React, { useEffect,useState } from "react";
-import "./EditProfile.css";
 import { useOutletContext } from 'react-router-dom';
 
 import { getUserDetails } from "../api/AuthService";

@@ -3,9 +3,6 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/'; // Backend URL
 
 // Register a new user
-export const registerUser = (userData) => {
-  return axios.post(`${API_URL}api/users/signup`, userData); // Register endpoint
-};
 
 // Login a user
 export const loginUser = async (email, password) => {
@@ -21,11 +18,41 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Logout a user
-export const logoutUser = () => {
-  localStorage.removeItem('token'); // or sessionStorage, depending on your use case
-  // Redirect or perform other actions as needed
+
+
+// Register a new user
+export const registerUser = async (name, email, password) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}api/users/signup`,
+      { name, email, password },
+      { withCredentials: true }
+    );
+    return response.data; // Return the response data (if needed)
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Registration failed');
+  }
 };
+
+// Logout a user
+
+
+export const deleteUser = async (id) => {
+  try {
+    // Send DELETE request to delete user by ID
+    const response = await axios.delete(`${API_URL}api/users/deleteuser/${id}`);
+    
+    // If successful, log success message or handle further actions
+    console.log('User deleted successfully', response.data);
+    
+    // Optionally, update your state or UI
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    throw error.response?.data?.error || 'Failed to delete user';
+  }
+};
+
 
 // Fetch all users with pagination
 export const fetchAllUsers = async (token, currentPage = 1, usersPerPage = 5) => {
@@ -140,5 +167,34 @@ export const deleteTask = async (taskid) => {
 
     // Extract and throw a meaningful error message
     throw error.response?.data?.error || "Failed to delete task";
+  }
+};
+
+
+export const getWeather = async (latitude, longitude) => {
+  try {
+    const response = await fetch(
+      `${API_URL}api/weather/getWeather?latitude=${latitude}&longitude=${longitude}`
+    );
+    if (!response.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return { error: "An error occurred while fetching weather data" };
+  }
+};
+
+
+export const getUserByName = async (name) => {
+  try {
+    const response = await axios.get(`${API_URL}api/users/getUserbyName/${name}`);
+    // console.log(response.data); // Log the data to see its structure
+
+    return response.data;
+  } catch (error) {
+    throw new Error('User not found');
   }
 };

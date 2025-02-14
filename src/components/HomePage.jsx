@@ -10,6 +10,7 @@ import {
   UserPlus,
   ShoppingCart,
 } from "lucide-react";
+import WeatherSearchCard from "./WeatherCard";
 const stats = [
   {
     title: "Today's Money",
@@ -40,28 +41,60 @@ const stats = [
     positive: true,
   },
 ];
+
+
+const mockWeatherData = {
+  location: {
+    name: "Paris",
+    region: "Ile-de-France",
+    country: "France",
+    lat: 48.867,
+    lon: 2.333,
+    tz_id: "Europe/Paris",
+    localtime_epoch: 1738767124,
+    localtime: "2025-02-05 15:52"
+  },
+  current: {
+    last_updated: "2025-02-05 15:45",
+    temp_c: 6.4,
+    temp_f: 43.5,
+    condition: {
+      text: "Fog",
+      icon: "https://cdn.weatherapi.com/weather/64x64/day/248.png"
+    },
+    wind_mph: 4.7,
+    humidity: 93,
+    pressure_mb: 1039.0,
+    pressure_in: 30.68,
+    precip_mm: 0.0,
+    precip_in: 0.0,
+    feelslike_c: 4.9,
+    feelslike_f: 40.8,
+    windchill_c: 9.4,
+    windchill_f: 48.9,
+    heatindex_c: 10.2,
+    heatindex_f: 50.4,
+    dewpoint_c: 2.3,
+    dewpoint_f: 36.2,
+    vis_km: 10.0,
+    vis_miles: 6.0,
+    uv: 0.7,
+    gust_mph: 5.7,
+    gust_kph: 9.2
+  }
+};
+
 export default function HomePage() {
   return (
     <div className="app">
       <header>
-        <div className="header-content">
+        <div className="header-contents">
           <div className="breadcrumb">
             <Home className="icon" />
             <span className="separator">/</span>
             <span className="current">Dashboard</span>
           </div>
-          <div className="header-actions">
-            <div className="search-container">
-              <Search className="search-icon" />
-              <input type="text" placeholder="Type here..." />
-            </div>
-            <button className="icon-button">
-              <Settings />
-            </button>
-            <button className="icon-button">
-              <Bell />
-            </button>
-          </div>
+         
         </div>
       </header>
       <main>
@@ -100,26 +133,11 @@ export default function HomePage() {
                 <br />
                 Ask me anything.
               </p>
-              <button className="record-button">Tap to record</button>
             </div>
-            <div className="welcome-blur"></div>
           </div>
           
-          <div className="satisfaction-card">
-            <h3 className="card-title">Satisfaction Rate</h3>
-            <p className="card-subtitle">From all Users</p>
-            <div className="satisfaction-chart">
-              <div className="satisfaction-value">
-                <span>95%</span>
-              </div>
-              <svg viewBox="0 0 36 36">
-                <path
-                  d="M18 2.0845
-                    a 15.9155 15.9155 0 0 1 0 31.831
-                    a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-              </svg>
-            </div>
+          <div >
+            <WeatherSearchCard weatherData={mockWeatherData} />
           </div>
           
         </div>
