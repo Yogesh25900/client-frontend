@@ -35,7 +35,7 @@ const LoginSignup = () => {
 
       } else {
         await loginUser(formData.email, formData.password);
-        navigate('/dashboard');  // Redirect to the dashboard after login
+        navigate('/main/home');  // Redirect to the dashboard after login
 
         setSuccess("Login successful!");
         setTimeout(() => setSuccess(""), 3000);

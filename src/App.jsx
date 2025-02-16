@@ -17,8 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         {/* Remove the `/dashboard` part */}
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="" element={<HomePage />} />
+        <Route path="/main" element={<Dashboard />}>
+          <Route path="home" element={<HomePage />} />
           <Route path="chat-with-ai" element={<Chat />} />
 
           <Route path="profile" element={<ProfilePage />} />

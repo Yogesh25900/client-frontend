@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Search } from "lucide-react"; // Import Lucide Search Icon
 import "./SearchBar.css"; // Add styles for the search bar
 
 function SearchBar({ onSearch }) {
@@ -13,9 +12,7 @@ function SearchBar({ onSearch }) {
 
   return (
     <div className="search-bar-container">
-      {/* Search icon */}
-      <Search size={20} color="#888" className="search-icon" />
-
+   
       {/* Search input field */}
       <input
         type="text"

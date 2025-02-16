@@ -198,3 +198,21 @@ export const getUserByName = async (name) => {
     throw new Error('User not found');
   }
 };
+
+
+
+
+
+export const addFeedback = async (userID, feedbackContent) => {
+  try {
+    const response = await axios.post(`${API_URL}api/feedback/createfeedback`, {
+      userID,
+      feedbackContent
+    });
+
+    return response.data; // Returns the feedback object created in the backend
+  } catch (error) {
+    console.error("Error submitting feedback:", error);
+    return null; // Returns null if there's an error
+  }
+};

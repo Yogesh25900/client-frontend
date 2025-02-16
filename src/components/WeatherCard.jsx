@@ -65,7 +65,13 @@ const WeatherSearchCard = () => {
 
   return (
     <div className="weather-card">
-      <h3>Weather Information</h3>
+                    <h3>Weather Information</h3>
+
+      <div className={`sync-icon ${isSyncing ? 'syncing' : ''}`}
+        onClick={handleSyncClick}>
+
+        <RefreshCw size={24} />
+      </div>
       <div className="weather-condition">
             <img src={weatherData.current.condition.icon} alt="Weather Icon" />
             <h4>{weatherData.current.condition.text}</h4>
@@ -120,12 +126,7 @@ const WeatherSearchCard = () => {
       )}
 
       {/* Sync Icon in the top-right corner */}
-      <div
-        className={`sync-icon ${isSyncing ? 'syncing' : ''}`}
-        onClick={handleSyncClick}
-      >
-        <RefreshCw size={24} />
-      </div>
+    
     </div>
   );
 };

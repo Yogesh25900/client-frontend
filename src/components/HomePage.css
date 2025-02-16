@@ -2,6 +2,8 @@
     min-height: 100vh;
     background: linear-gradient(60deg, rgba(12, 13, 13, 0.85), rgba(7, 62, 157, 0.9));
     color: white;
+    padding: 10px;
+
     /* padding: 20px; Optional for spacing */
   }
   
@@ -114,8 +116,7 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   .welcome-card {
-    position: relative;
-    overflow: hidden;
+   
     border-radius: 1rem;
     background: linear-gradient(to right, #2563EB, #60A5FA);
     padding: 1.5rem;
@@ -124,7 +125,7 @@
   }
   .welcome-content {
     position: relative;
-    z-index: 1;
+   
     padding: 20px;
   }
   .welcome-subtitle {

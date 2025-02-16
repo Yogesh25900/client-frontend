@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import './HomePage.css'
+import { getUserDetails } from "../api/AuthService";
+import { useOutletContext } from 'react-router-dom'; // Import hook to access context
+
 import {
+
   Search,
   Settings,
   Bell,
@@ -85,6 +89,29 @@ const mockWeatherData = {
 };
 
 export default function HomePage() {
+  const userId = useOutletContext(); // Access the context passed from the parent
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await getUserDetails(userId);
+        console.log(response.user.name); // Log the response to check the structure
+        if (response.user && response.user.name) {
+          setUserName(response.user.name); // Assuming the response contains a "name" field
+        } else {
+          console.error("User details not found or missing 'name' field.");
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    if (userId) {
+      fetchUserDetails(); // Fetch details only if userId is valid
+    }
+  }, [userId]); // Fetch when userId changes
+
   return (
     <div className="app">
       <header>
@@ -97,7 +124,7 @@ export default function HomePage() {
          
         </div>
       </header>
-      <main>
+    
         <div className="stats-grid">
           {stats.map((stat, index) => (
             <div key={index} className="stat-card">
@@ -127,7 +154,7 @@ export default function HomePage() {
           <div className="welcome-card">
             <div className="welcome-content">
               <p className="welcome-subtitle">Welcome back,</p>
-              <h2 className="welcome-title">Mark Johnson</h2>
+              <h2 className="welcome-title">{userName}</h2>
               <p className="welcome-text">
                 Glad to see you again!
                 <br />
@@ -141,7 +168,7 @@ export default function HomePage() {
           </div>
           
         </div>
-      </main>
+     
      
     </div>
   );
