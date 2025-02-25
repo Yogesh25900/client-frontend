@@ -216,3 +216,67 @@ export const addFeedback = async (userID, feedbackContent) => {
     return null; // Returns null if there's an error
   }
 };
+
+
+
+
+export const getAllFeedback = async () => {
+  try {
+    const response = await axios.get(`${API_URL}api/feedback/get-all-feedback`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all feedback:', error);
+    throw error;
+  }
+};
+
+
+
+export const deleteFeedback = async (feedbackID) => {
+  try {
+    const response = await axios.delete(`${API_URL}api/feedback/delete-feedback/${feedbackID}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all feedback:', error);
+    throw error;
+  }
+};
+
+export const sendCodeToEmail = async (email) => {
+  try {
+    const response = await axios.post(`${API_URL}email/send-verification-email`,{email});
+    return response.data;
+  } catch (error) {
+    console.log('Error sending email. Please try again.', error);
+    throw error;
+  }
+};
+
+
+
+
+export const verifyOTP = async (email,code) => {
+  try {
+    const response = await axios.post(`${API_URL}email/verify-code`,{email,code});
+    return response.data;
+  } catch (error) {
+    throw error;
+
+  }
+};
+
+
+export const resetPassword = async (email,newPassword) => {
+  try {
+    const response = await axios.post(`${API_URL}api/users/forgotPassword`,{email,newPassword});
+    return response.data;
+  } catch (error) {
+    throw error;
+
+  }
+};
+
+
+
+
+

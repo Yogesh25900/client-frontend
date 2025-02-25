@@ -45,3 +45,66 @@ body {
   overflow-y: auto; /* Scrollable content */
   padding-right: 20px; /* Add space for scrollbar visibility */
 }
+
+
+/* Light Mode Styles */
+body {
+  background-color: white;
+  color: black;
+}
+
+button {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode button {
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+/* You can use CSS variables to make the dark mode more flexible */
+:root {
+  --background-color: white;
+  --text-color: black;
+}
+
+.dark-mode {
+  --background-color: #121212;
+  --text-color: white;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+
+
+/* Dark Mode Scrollbar */
+
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #908a8a;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #101010;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #696262;
+  }
+

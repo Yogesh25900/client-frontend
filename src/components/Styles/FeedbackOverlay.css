@@ -11,6 +11,7 @@
     align-items: center;
     z-index: 9999; /* Make sure it's on top */
   }
+ 
   
   .feedback-content {
     background-color: white;
@@ -25,4 +26,13 @@
     display: flex;
     justify-content: center;
     gap:20px;
+  }
+
+
+  #feedbackmodal-btn{
+    background-color: #2980b9;
+
+  }
+  #feedbackmodal-btn:hover{
+    background-color: #2471a3;
   }

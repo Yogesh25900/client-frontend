@@ -704,3 +704,15 @@ form.sign-in-form {
   .password-toggle-icon:hover {
     color: #4e4d4d;
   }
+
+
+  .hyperlink-text {
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+  }
+  
+  .hyperlink-text:hover {
+    text-decoration: underline;
+  }
+  

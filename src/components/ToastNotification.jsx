@@ -4,7 +4,7 @@ import { Info } from 'lucide-react'; // Import the Lucide info icon
 import { Toaster, toast } from "react-hot-toast";
 
 // Toast Notification Component
-const ToastNotification = () => {
+export const ToastNotification = () => {
   return <Toaster position="top-center" />;
 };
 

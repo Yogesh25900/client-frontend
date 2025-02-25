@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { HomeIcon, BarChart2, CirclePlus, Settings, UserCircle, MessageSquareQuote, LogIn, ListTodo, Menu } from "lucide-react";
+import { HomeIcon, BarChart2, CirclePlus, Settings, UserCircle, MessageSquareQuote, LogIn, ListTodo, Menu ,TableOfContents} from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./Navbar.css";
 import FeedbackOverlay from "./reusable-ui/FeedbackOverlay ";
+import LogoutModal from "./reusable-ui/LogoutModal";
 import { addFeedback } from "../api/AuthService";
 import { showSuccessToast, showErrorToast } from './ToastNotification'; // Import your toast functions
 import axios from 'axios';
 
-const Sidebar = ({ toggleSidebar, isOpen ,userID}) => {
+const Sidebar = ({ toggleSidebar, isOpen ,userID,userType}) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isFeedbackModalOpen, setFeedbackModalOpen] = useState(false);
 
@@ -59,40 +60,32 @@ const Sidebar = ({ toggleSidebar, isOpen ,userID}) => {
 
   const handleSubmitFeedback = async (feedback) => {
     console.log("Feedback received:", feedback);  // You can process the feedback here
-
+  
     // Optionally store the feedback in state
     setFeedbackData(feedback);
-
+  
     // Send feedback to API
     try {
-     // Replace 'userID' with the actual cookie key you're using
-      const response = await addFeedback(userID, feedback); // Send feedback to the API
-
-      if (response) {
-        showSuccessToast('Feedback submitted successfully!');
-
+      if (feedback !== null && feedback !== undefined) {
+        // Replace 'userID' with the actual cookie key you're using
+        const response = await addFeedback(userID, feedback); // Send feedback to the API
+  
+        if (response.success) {
+          showSuccessToast('Feedback submitted successfully!');
+        } else {
+          showErrorToast('Error submitting feedback. Please try again.');
+          console.error('Error submitting feedback:', response?.message || 'Unknown error');
+        }
       } else {
-        showErrorToast('Error submitting feedback. Please try again.');
-
-        console.error('Error submitting feedback');
+        showErrorToast('Feedback cannot be empty');
       }
     } catch (error) {
       showErrorToast('Error submitting feedback. Please try again.');
-
       console.error('Error submitting feedback to the API:', error);
     }
   };
+  
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!feedbackContent) {
-      alert("Please enter your feedback!");
-      return;
-    }
-
-    handleSubmitFeedback(feedbackContent);  // Send feedback content to the handler
-  };
 
   return (
     <div className={`sidebar ${isOpen ? "open" : "collapsed"}`}>
@@ -108,9 +101,22 @@ const Sidebar = ({ toggleSidebar, isOpen ,userID}) => {
       <nav>
         <div className="nav-section">
           <NavItem icon={<HomeIcon size={20} />} label="Dashboard" to="/main/home" isOpen={isOpen} />
+
+          {userType == "2" && (
           <NavItem icon={<BarChart2 size={20} />} label="Users" to="/main/user-tables" isOpen={isOpen} />
+
+          )}
           <NavItem icon={<CirclePlus size={20} />} label="Chat with AI" to="/main/chat-with-ai" isOpen={isOpen} />
           <NavItem icon={<ListTodo size={20} />} label="Task" to="/main/task" isOpen={isOpen} />
+
+
+          {userType === "2" && (
+         
+            <NavItem icon={<TableOfContents size={20} />} label="Feedback Table" to="/main/feedback-table" isOpen={isOpen} />
+
+        
+          )}
+
           <NavItemForNone
             icon={<MessageSquareQuote size={20} />}
             label="Feedback"
@@ -147,13 +153,11 @@ const Sidebar = ({ toggleSidebar, isOpen ,userID}) => {
 
       {/* Modal for Logout Confirmation */}
       {isModalOpen && (
-        <div className="navbar-modal-overlay">
-          <div className="navbar-modal-content">
-            <p className="text-black">Are you sure want to log out?</p>
-            <button onClick={handleConfirmLogout}>Yes</button>
-            <button onClick={handleCancelLogout}>No</button>
-          </div>
-        </div>
+       
+       <LogoutModal handleConfirmLogout ={handleConfirmLogout}
+       handleCancelLogout ={handleCancelLogout}/>
+          
+         
       )}
     </div>
   );

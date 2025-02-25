@@ -9,6 +9,7 @@ const Chat = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
   const chatContainerRef = useRef(null);
+  const recognition = useRef(null); // Speech Recognition API instance
 
   useEffect(() => {
     if (userID) fetchChatHistory();
@@ -29,7 +30,7 @@ const Chat = () => {
       const response = await axios.post('http://localhost:3000/api/chat-history/get-chat', { userID });
       if (Array.isArray(response.data)) {
         setChatHistory(response.data);
-        console.log('chat history',response.data);
+        console.log('chat history', response.data);
       } else {
         setChatHistory([]);
       }
@@ -88,6 +89,9 @@ const Chat = () => {
       setQueryText('');
 
       typeLetterByLetter(response.responsetext, chatHistory.length);
+
+      // Call speech-to-text for assistant response
+      speakResponse(response.responsetext);
     } catch (error) {
       console.error('Error sending query:', error);
     }
@@ -99,23 +103,65 @@ const Chat = () => {
     }
   };
 
+  const startSpeechRecognition = () => {
+    if ('webkitSpeechRecognition' in window) {
+      recognition.current = new window.webkitSpeechRecognition();
+      recognition.current.lang = 'en-US';
+      recognition.current.interimResults = true;
+
+      recognition.current.onstart = () => console.log('Speech recognition started');
+      recognition.current.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        setQueryText(transcript);
+      };
+
+      recognition.current.onend = () => {
+        if (querytext.trim()) {
+          submitQuery(); // Submit the query automatically when the user stops speaking
+        }
+      };
+
+      recognition.current.onerror = (error) => console.error('Speech recognition error:', error);
+      recognition.current.start();
+    } else {
+      alert('Speech recognition is not supported in this browser.');
+    }
+  };
+
+  const speakResponse = (responseText) => {
+    const speechSynthesis = window.speechSynthesis;
+    if (speechSynthesis) {
+      const speech = new SpeechSynthesisUtterance(responseText);
+      speechSynthesis.speak(speech);
+    }
+  };
+
   return (
     <div className='chat-main-container'>
       <div className="chat-history" ref={chatContainerRef}>
-        {chatHistory.map((chat, index) => (
-          <div key={index} className="chat-entry">
-            <div className="user-query">
-              <strong>User:</strong>
-              <p>{chat.query.querytext}</p>
-            </div>
-            {chat.response && (
-              <div className="assistant-reply">
-                <strong>Assistant:</strong>
-                <p className='whitespace-preline'>{chat.currentReply ? chat.currentReply : chat.response.responsetext}</p>
-              </div>
-            )}
+        {chatHistory.length === 0 ? (
+          <div className="start-chat-message">
+            <p>Start your chat with AI</p>
           </div>
-        ))}
+        ) : (
+          chatHistory.map((chat, index) => (
+            <div key={index} className="chat-entry">
+              <div className="user-query">
+                <strong>User:</strong>
+                <p>{chat.query.querytext}</p>
+              </div>
+              {chat.response && (
+                <div className="assistant-reply">
+                  <strong>Assistant:</strong>
+                  <p className='whitespace-preline'>{chat.currentReply ? chat.currentReply : chat.response.responsetext}</p>
+                </div>
+              )}
+            </div>
+          ))
+        )}
       </div>
 
       <div className="search-container">
@@ -130,7 +176,7 @@ const Chat = () => {
           <div className="send-button" onClick={submitQuery}>
             <i className="fas fa-paper-plane"></i>
           </div>
-          <div className="voice-button" title="Click to Speak">
+          <div className="voice-button" title="Click to Speak" onClick={startSpeechRecognition}>
             <i className="fas fa-microphone"></i>
           </div>
         </div>

@@ -106,11 +106,13 @@ const ProfilePage = () => {
 
       // setMessage(`Image uploaded successfully: ${res.data.filePath}`);
       user.profilePicture = res.data.filePath;
+      showSuccessToast("Image uploaded successfully");
 
       console.log("new profile picture: " + res.data.filePath);
       await handleSave(); // This will update the profile in the database
 
     } catch (error) {
+      showErrorToast("Failed to upload image")
       console.error("Error uploading image:", error);
       setMessage("Failed to upload image. Please try again.");
     }
@@ -126,7 +128,7 @@ const ProfilePage = () => {
       // setMessage("Profile updated successfully!"); // Show success message
       setError(null); // Clear any errors
     } catch (err) {
-      setError(err.response?.data?.message || "Failed to update profile");
+      // setError(err.response?.data?.message || "Failed to update profile");
       setMessage(null); // Clear success message
       showErrorToast("Error Updating Profile!");
 
@@ -136,13 +138,13 @@ const ProfilePage = () => {
  
 
   return (
-    <div className="app-container">
+    <div className="profile-page-container">
             <Toaster position="top-center" /> {/* Position toast at top-center */}
 
       <div className="max-width-container">
         <header className="header">
           <div className="header-left">
-            <h1 className="title">Edit User Profile</h1>
+            <h1 className="profile-title">Edit User Profile</h1>
           </div>
       
         </header>
@@ -156,7 +158,7 @@ const ProfilePage = () => {
                   className="profile-image"
                 />
                 <div className="profile-actions">
-                  <p className="label">{user?.name || "Your Name"}</p>
+                  <p className="profile-label">{user?.name || "Your Name"}</p>
                   <p className="description">This will be displayed on your profile</p>
                   <div className="action-buttons">
                  
@@ -225,8 +227,8 @@ const ProfilePage = () => {
               </div>
               <div className="formbuttonsave">
                 <button className="save-btn" onClick={handleSave}>Save</button>
-                {message && <p className="success-message">{message}</p>}
-                {error && <p className="error-message">{error}</p>}
+                {/* {message && <p className="success-message">{message}</p>}
+                {error && <p className="error-message">{error}</p>} */}
               </div>
             </div>
           </div>

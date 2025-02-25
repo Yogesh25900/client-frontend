@@ -1,6 +1,6 @@
 import React from "react";
 import "./SettingsPage.css";
-
+import DarkModeToggle from "./reusable-ui/DarkModeToggle";
 const SettingsPage = () => {
   return (
     <div className="settings-page">
@@ -15,6 +15,7 @@ const SettingsPage = () => {
           <input type="checkbox" />
           Dark Mode
         </label>
+        <DarkModeToggle />
         <button className="save-button">Save Changes</button>
       </div>
     </div>

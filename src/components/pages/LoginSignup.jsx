@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../Styles/LoginStyle.css";
 import { loginUser, registerUser } from "../../api/AuthService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
+import Cookies from "js-cookie";
+
 const LoginSignup = () => {
     const navigate = useNavigate();
 
@@ -34,9 +36,13 @@ const LoginSignup = () => {
         setTimeout(() => setSuccess(""), 3000);
 
       } else {
-        await loginUser(formData.email, formData.password);
-        navigate('/main/home');  // Redirect to the dashboard after login
+        const response = await loginUser(formData.email, formData.password);
+        console.log(response);
 
+    
+          
+        navigate('/main/home');  // Redirect to the dashboard after login
+       
         setSuccess("Login successful!");
         setTimeout(() => setSuccess(""), 3000);
 
@@ -88,6 +94,8 @@ const LoginSignup = () => {
             </div>
             {error && <p className="error">{error}</p>}
             {success && <p className="success">{success}</p>}
+            <NavLink to='/forgot-password' className="hyperlink-text">Forgot Password  </NavLink>
+
             <button type="submit" className="btn solid">Login</button>
           </form>
 

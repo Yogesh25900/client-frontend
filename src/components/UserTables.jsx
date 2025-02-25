@@ -138,7 +138,7 @@ function UserTables() {
         <div className="header-left">
           <Home className="icon" />
           <span className="separator">/</span>
-          <span className="title">Users</span>
+          <span className="user-table-title">Users</span>
         </div>
       </div>
       <div className="table-container">

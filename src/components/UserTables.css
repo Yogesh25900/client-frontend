@@ -4,7 +4,7 @@
     min-height: 100vh;
     background-color: #1b1b1b;
     color: white;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     padding: 20px;
 }
   
@@ -229,6 +229,8 @@
   .table-cell-actions {
     display: flex;
     align-items: center;
+    margin-top: 10px;
+
   }
   
 

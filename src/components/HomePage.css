@@ -124,7 +124,7 @@
 
   }
   .welcome-content {
-    position: relative;
+    /* position: relative; */
    
     padding: 20px;
   }
@@ -183,6 +183,7 @@
     font-size: 0.875rem;
   }
  
+  
   
  
   @media (max-width: 768px) {

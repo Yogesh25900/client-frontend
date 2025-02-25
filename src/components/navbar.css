@@ -177,7 +177,8 @@
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  /* justify-content: center; */
+  gap: 0.65rem;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -302,7 +303,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.7); /* Darker background for feedback modal */
   display: flex;
   justify-content: center;
   align-items: center;
