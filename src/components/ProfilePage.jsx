@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Bell, MessageCircle, Sun, X } from "lucide-react";
 import { validateToken, getUserDetails, updateUserDetails } from "../api/AuthService"; // Assuming you have these API functions
 import './ProfilePage.css';
 import { useOutletContext, useNavigate } from "react-router-dom";
@@ -69,29 +68,20 @@ const ProfilePage = () => {
       [name]: value,
     }));
   };
-
   // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-
     // Generate a preview URL for the selected image
     const filePreview = URL.createObjectURL(file);
-    setPreview(filePreview); // This will show the image preview
-
-
-    
+    setPreview(filePreview); // This will show the image preview   
   };
-
   // Handle file upload submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
     if (!image) {
       return;
     }
-
     const formData = new FormData();
     formData.append("image", image);
 
@@ -101,16 +91,11 @@ const ProfilePage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      
-
       // setMessage(`Image uploaded successfully: ${res.data.filePath}`);
       user.profilePicture = res.data.filePath;
       showSuccessToast("Image uploaded successfully");
-
       console.log("new profile picture: " + res.data.filePath);
       await handleSave(); // This will update the profile in the database
-
     } catch (error) {
       showErrorToast("Failed to upload image")
       console.error("Error uploading image:", error);

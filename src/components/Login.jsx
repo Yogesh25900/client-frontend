@@ -14,7 +14,6 @@ const Login = () => {
     
     try {
       const response = await loginUser(email, password);  // Call the loginUser function
-      console.log(response);  // Log the response data (optional)
       navigate('/dashboard');  // Redirect to the dashboard after login
     } catch (error) {
       console.error('Login failed:', error.message);  // Display error message

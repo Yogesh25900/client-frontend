@@ -57,6 +57,19 @@
     font-weight: 500;
   }
   
+
+  .modal-header{
+    display: flex;
+    justify-content: center;
+    
+    align-items: center;
+  }
+  .edit-user{
+    color:white;
+    font-size: 16px;
+    cursor: pointer;
+    padding-bottom: 20px;
+  }
   .header-right {
     display: flex;
     align-items: center;
@@ -287,17 +300,21 @@
   }
   
   .modal-content {
+    padding-top: 10px;
     background: #243973;
     padding: 20px;
-    border-radius: 8px;
-    width: 400px;
+    border-radius: 10px;
+    width: 600px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .edit-form{
+    border-radius: 15px;
     background: #1c3754;
   }
   .form-group {
+    padding: 10px;
+    width: 100%;
     margin-bottom: 15px;
   }
   

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../Styles/LoginStyle.css";
 import { loginUser, registerUser } from "../../api/AuthService";
 import { useNavigate,NavLink } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const LoginSignup = () => {
     const navigate = useNavigate();

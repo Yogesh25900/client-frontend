@@ -24,7 +24,6 @@ function UserTables() {
   });
   const [searchTerm, setSearchTerm] = useState("");  // State for search term
   const token = localStorage.getItem("token");
-
   const handleSearch = (term) => {
     setSearchTerm(term);
     setCurrentPage(1);  // Reset to page 1 when searching
@@ -64,7 +63,6 @@ function UserTables() {
       setCurrentPage(page);
     }
   };
-
   const openEditModal = (user) => {
     setCurrentUser(user);
     setEditedUser({
@@ -76,7 +74,6 @@ function UserTables() {
     });
     setIsEditModalOpen(true);
   };
-
   const closeEditModal = () => {
     setIsEditModalOpen(false);
     setCurrentUser(null);
@@ -197,7 +194,9 @@ function UserTables() {
       {isEditModalOpen && currentUser && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3>Edit User</h3>
+            <div className="modal-header">
+            <h3 className="edit-user">Edit User</h3>
+            </div>
             <form className="edit-form" onSubmit={handleSave}>
               <div className="form-group">
                 <label>Name</label>
@@ -240,5 +239,4 @@ function UserTables() {
     </div>
   );
 }
-
 export default UserTables;

@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react';
 import './HomePage.css';
 import { getUserDetails } from "../api/AuthService";
 import { useOutletContext } from 'react-router-dom';
-
-import {
-  Home,
-  Wallet,
-  Users,
-  UserPlus,
-  ShoppingCart,
-} from "lucide-react";
+import Cookies from 'js-cookie';
+import {Home,Users} from "lucide-react";
 import WeatherSearchCard from "./WeatherCard";
-
 export default function HomePage() {
   const userId = useOutletContext();
   const [userName, setUserName] = useState('');
   const [userStats, setUserStats] = useState({ totalUsers: 0, percentageIncrease: 0 });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [userType, setUserType] = useState(null); // Change to "user" for normal users
+  useEffect(() => {
+      const role = Cookies.get("role"); // Get role from cookies
+      setUserType(role); // Default to "user" if not found
+  }, []);
 
   useEffect(() => {
     const fetchUserStats = async () => {
@@ -39,7 +37,6 @@ export default function HomePage() {
         setLoading(false);
       }
     };
-
     fetchUserStats(); // Call inside useEffect to prevent extra renders
   }, []); // Run only once on mount
 
@@ -56,20 +53,12 @@ export default function HomePage() {
         console.error('Error fetching user details:', error);
       }
     };
-
     if (userId) {
       fetchUserDetails();
     }
   }, [userId]);
 
   const stats = [
-    {
-      title: "Today's Money",
-      value: "$53,000",
-      change: "+55%",
-      icon: Wallet,
-      positive: true,
-    },
     {
       title: "Today's Users",
       value: userStats.totalUsers,
@@ -79,22 +68,7 @@ export default function HomePage() {
       icon: Users,
       positive: true,
     },
-    {
-      title: "New Clients",
-      value: "+3,462",
-      change: "-2%",
-      icon: UserPlus,
-      positive: false,
-    },
-    {
-      title: "Total Sales",
-      value: "$103,430",
-      change: "+5%",
-      icon: ShoppingCart,
-      positive: true,
-    },
   ];
-
   return (
     <div className="app">
       <header>
@@ -107,26 +81,28 @@ export default function HomePage() {
         </div>
       </header>
 
-      <div className="stats-grid">
-        {stats.map((stat, index) => (
-          <div key={index} className="stat-card">
-            <div className="stat-content">
-              <div>
-                <p className="stat-title">{stat.title}</p>
-                <div className="stat-value-container">
-                  <p className="stat-value">{stat.value}</p>
-                  <span className={`stat-change ${stat.positive ? "positive" : "negative"}`}>
-                    {stat.change}
-                  </span>
+      {userType === '2' && (
+        <div className="stats-grid">
+          {stats.map((stat, index) => (
+            <div key={index} className="stat-card">
+              <div className="stat-content">
+                <div>
+                  <p className="stat-title">{stat.title}</p>
+                  <div className="stat-value-container">
+                    <p className="stat-value">{stat.value}</p>
+                    <span className={`stat-change ${stat.positive ? "positive" : "negative"}`}>
+                      {stat.change}
+                    </span>
+                  </div>
+                </div>
+                <div className="stat-icon">
+                  <stat.icon />
                 </div>
               </div>
-              <div className="stat-icon">
-                <stat.icon />
-              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <div className="dashboard-grid">
         <div className="welcome-card">

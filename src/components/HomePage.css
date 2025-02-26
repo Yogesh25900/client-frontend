@@ -62,16 +62,19 @@
     padding: 1.5rem;
   }
   .stats-grid {
-    display: grid;
+    display: flex; /* Use flexbox instead of grid */
     gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
+  
   .stat-card {
     background-color: #111C44;
     border-radius: 1rem;
     padding: 1.5rem;
     transition: transform 0.2s;
+    max-width: 300px; /* Set a max width */
+    width: 100%; /* Ensure it doesn’t exceed the max width */
   }
+  
   .stat-card:hover {
     transform: scale(1.05);
   }

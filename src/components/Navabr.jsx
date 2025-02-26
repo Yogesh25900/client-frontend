@@ -44,9 +44,7 @@ const Sidebar = ({ toggleSidebar, isOpen ,userID,userType}) => {
   
       // Remove token from local storage if stored there
      
-      console.log(sessionStorage.getItem('token'));
       sessionStorage.removeItem('token');
-      console.log('loggin out');
       // Redirect to login page
       navigate('/');
     } catch (error) {
@@ -59,7 +57,6 @@ const Sidebar = ({ toggleSidebar, isOpen ,userID,userType}) => {
 
 
   const handleSubmitFeedback = async (feedback) => {
-    console.log("Feedback received:", feedback);  // You can process the feedback here
   
     // Optionally store the feedback in state
     setFeedbackData(feedback);
